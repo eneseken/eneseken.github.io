@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enes Eken - PDF Metodu</title>
+    <title>Zihin Academy</title>
+    <link rel="icon" href="Z.png" type="image/png">
     <style>
         /* Modern Reset and Base Styles */
         * {
@@ -14,7 +16,7 @@
 
         body {
             /* Arka plan rengi (Görseldeki gibi açık pembemsi/gri bir renk) */
-            background-color: #EFE9E6; 
+            background-color: #EFE9E6;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: #1a1a1a;
             display: flex;
@@ -27,7 +29,8 @@
         .container {
             background-color: #ffffff;
             width: 100%;
-            max-width: 650px; /* İçeriğin çok yayılmaması için ideal genişlik */
+            max-width: 650px;
+            /* İçeriğin çok yayılmaması için ideal genişlik */
             min-height: 100vh;
             padding: 60px 50px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
@@ -68,7 +71,7 @@
             object-fit: cover;
             margin-bottom: 20px;
             /* Resim yoksa gri bir yer tutucu */
-            background-color: #e0e0e0; 
+            background-color: #e0e0e0;
             display: block;
         }
 
@@ -85,20 +88,254 @@
         }
 
         .content p {
-            margin-bottom: 24px; /* Paragraflar arası boşluk */
+            margin-bottom: 24px;
+            /* Paragraflar arası boşluk */
         }
 
-        /* Mobil Cihazlar İçin Uyum (Responsive) */
+        /* Dropdown (Accordion) Stilleri */
+        .accordion {
+            background-color: #f9f9f9;
+            color: #1a1a1a;
+            cursor: pointer;
+            padding: 18px 20px;
+            width: 100%;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.4s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .accordion.active,
+        .accordion:hover {
+            background-color: #f1f1f1;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            /* Artı işareti (+) */
+            color: #777;
+            font-weight: bold;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+        .accordion.active:after {
+            content: "\2212";
+            /* Eksi işareti (-) */
+        }
+
+        .panel {
+            padding: 0;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .panel-content {
+            padding: 20px 0;
+        }
+
+        .dropdown-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
         @media (max-width: 600px) {
-            .container {
-                padding: 40px 25px;
-            }
+
             .site-header h1 {
                 font-size: 42px;
             }
+
+            .floating-wp-box {
+                bottom: 80px;
+                right: 20px;
+                width: calc(100% - 40px);
+            }
+        }
+
+        /* Floating WhatsApp Widget Styles */
+        .wp-widget-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .floating-wp-btn {
+            width: 60px;
+            height: 60px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+            border: 2px solid #25D366;
+            /* Yeşil ince bir çerçeve şık durabilir, opsiyonel */
+        }
+
+        .floating-wp-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-wp-btn img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .floating-wp-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            transform-origin: bottom right;
+            animation: popUp 0.3s ease forwards;
+        }
+
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wp-box-header {
+            background-color: #25D366;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            position: relative;
+        }
+
+        .wp-box-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .wp-box-header p {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .wp-box-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .wp-box-close:hover {
+            opacity: 1;
+        }
+
+        .wp-box-body {
+            padding: 20px;
+            background-color: #fafafa;
+        }
+
+        .wp-box-body p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .wp-box-body input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background-color: white;
+            transition: border-color 0.3s;
+        }
+
+        .wp-box-body input:focus {
+            border-color: #25D366;
+        }
+
+        .wp-box-footer {
+            padding: 0 20px 20px 20px;
+            background-color: #fafafa;
+        }
+
+        #wp-contact-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #wp-contact-btn img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            /* Beyaz arkaplanlı logoyu buton içerisinde bembeyaz yapmak isterseniz */
+        }
+
+        #wp-contact-btn.active {
+            opacity: 1;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        #wp-contact-btn.active:hover {
+            background-color: #20bd5a;
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -111,21 +348,561 @@
         <!-- Profil ve İsim -->
         <div class="profile-section">
             <!-- NOT: Profil resminizi eklemek için 'profile.jpg' adında kare bir fotoğrafınızı klasöre atın ve alttaki src kısmına adını yazın -->
-            <img src="profile.jpg" alt="Enes Eken Profil" class="profile-pic" onerror="this.src='https://ui-avatars.com/api/?name=Enes+Eken&size=120&background=random&color=fff'">
+            <img src="profile.jpg" alt="Enes Eken Profil" class="profile-pic"
+                onerror="this.src='https://ui-avatars.com/api/?name=Enes+Eken&size=120&background=random&color=fff'">
             <h2 class="profile-name">Enes Eken</h2>
         </div>
 
         <!-- Yazı İçeriği -->
         <main class="content">
-            <p>Merhaba, ben Enes. 19 yaşındayım. Uzun süredir internetten para kazanma ve yapay zeka alanlarında kendimi aktif olarak geliştiriyorum. Son 4 aydır ise özellikle PDF Metodu üzerine yoğunlaştım. Bu süreçte 500’den fazla e-kitap satışı gerçekleştirdim ve satışlarım aktif olarak devam ediyor.</p>
-            
-            <p>Bu zamana kadar edindiğim tüm bilgi ve tecrübeleri, 16 videodan oluşan kapsamlı bir eğitim setinde topladım. Eğitimleri; kısa, sade ve herkesin anlayabileceği şekilde anlatmaya özellikle özen gösterdim. Türkiye’de son dönemde “dropshipping” kurslarının adeta bir bitki örtüsü gibi her yeri sarması, çoğunun da gerçekçi olmayan vaatler sunması nedeniyle; bu sisteme alternatif olarak Türkiye’de ilk kez, tamamen otomasyon mantığına dayalı, sürdürülebilir bir kazanç modeli olan PDF Metodu’nu hazırladım.</p>
-            
-            <p>Bu eğitimde; işi yasal çerçevede nasıl yapacağınızdan, doğru ürün seçimine, e-kitap içeriği hazırlamadan profesyonel kapak tasarımına, fiyatlandırmadan satış ve otomasyon süreçlerine kadar adım adım her detayı anlatıyorum. Shopier üzerinden e-kitap satan birçok kişi var; ancak bu işi bu kadar sistemli, şeffaf ve profesyonel şekilde ele alan çok az kişi bulunuyor.</p>
-            
-            <p>Amacım; hayal satmak değil, gerçekten uygulanabilir, dürüst ve sonuç alınabilir bir sistem sunmak. Eğer internetten para kazanma konusunda somut ve mantıklı bir yol arıyorsan, bu eğitim tam olarak bunun için hazırlandı.</p>
+            <p>Merhaba, ben Enes. 20 yaşındayım. Uzun süredir internetten para kazanma ve yapay zeka alanlarında kendimi
+                aktif olarak geliştiriyorum. Son 4 aydır ise özellikle PDF Metodu üzerine yoğunlaştım. Bu süreçte
+                binlerce e-kitap satışı gerçekleştirdim ve satışlarım aktif olarak devam ediyor.</p>
+
+            <p>Bu zamana kadar edindiğim tüm bilgi ve tecrübeleri, 16 videodan oluşan kapsamlı bir eğitim setinde
+                topladım. Eğitimleri; kısa, sade ve herkesin anlayabileceği şekilde anlatmaya özellikle özen gösterdim.
+                Türkiye’de son dönemde “dropshipping” kurslarının adeta bir bitki örtüsü gibi her yeri sarması, çoğunun
+                da gerçekçi olmayan vaatler sunması nedeniyle; bu sisteme alternatif olarak Türkiye’de ilk kez, tamamen
+                otomasyon mantığına dayalı, sürdürülebilir bir kazanç modeli olan PDF Metodu’nu hazırladım.</p>
+
+            <p>Bu eğitimde; işi yasal çerçevede nasıl yapacağınızdan, doğru ürün seçimine, e-kitap içeriği hazırlamadan
+                profesyonel kapak tasarımına, fiyatlandırmadan satış ve otomasyon süreçlerine kadar adım adım her detayı
+                anlatıyorum. Shopier üzerinden e-kitap satan birçok kişi var; ancak bu işi bu kadar sistemli, şeffaf ve
+                profesyonel şekilde ele alan çok az kişi bulunuyor.</p>
+
+            <p>Amacım; hayal satmak değil, gerçekten uygulanabilir, dürüst ve sonuç alınabilir bir sistem sunmak. Eğer
+                internetten para kazanma konusunda somut ve mantıklı bir yol arıyorsan, bu eğitim tam olarak bunun için
+                hazırlandı.</p>
+
+            <!-- Açılır Kapanır (Accordion) Alanı -->
+            <button class="accordion">E-kitapları nasıl satıyorum ?</button>
+            <div class="panel">
+                <div class="panel-content" style="display: flex; flex-direction: column; gap: 30px;">
+
+                    <div class="platform-section">
+                        <img src="zihinfelsefesitiktok.png" alt="TikTok İstatistikleri" class="dropdown-image"
+                            style="margin-bottom: 15px;">
+                        <p><strong>TikTok:</strong> TikTok'a Instagram'dan sonra giriş yaptım ve başlarda sahip olduğum
+                            önyargı için çok pişmanım. Kısa sürede ciddi bir kitleye ulaştım ve sadece 6 ay içinde
+                            ekranda gördüğünüz bu verileri elde ettim. Instagram'da uzun sürede alamadığım sonuçları,
+                            TikTok'ta ulaştığım milyonluk izlenmeler sayesinde kısa zamanda yakaladım ve binlerce
+                            sipariş aldım. Özellikle kişisel gelişim, psikoloji ve beden dili üzerine ürettiğim kısa
+                            içerikler, bu platformda inanılmaz bir karşılık buldu.</p>
+                    </div>
+
+                    <div class="platform-section">
+                        <img src="zihinfelsefesi-ig.png" alt="Instagram İstatistikleri" class="dropdown-image"
+                            style="margin-bottom: 15px;">
+                        <p><strong>Instagram:</strong> Instagram, Zihin Felsefesi projem için attığım en doğru
+                            adımlardan biriydi. 2024'te açtığım bu hesapta ilk ayımda 40.000 takipçi kazandım; ancak
+                            başlarda uyguladığım yanlış strateji (arkaya rahatlatıcı videolar koyup önüne altyazı
+                            eklemek) nedeniyle binlerce izlenmeye rağmen neredeyse hiç sipariş alamıyordum. Bu benim en
+                            büyük hatam ve aynı zamanda en değerli dersim oldu. Ne zaman ki yabancı piyasada kanıtlanmış
+                            içerik stratejilerini (tam olarak eğitimde anlattığım sistemle) kendi tarzıma uyarlayıp
+                            profesyonel bir şablona oturttum, işte o zaman satışlarım ciddi bir ivme kazandı. İnsanlara
+                            kaliteli ve gerçek bilgiler sunduğum için etkileşim oranlarım arttı ve buna paralel olarak
+                            satışlarım da sürekli bir büyüme trendine girdi.</p>
+                    </div>
+
+                    <div class="platform-section" style="margin-top: 20px;">
+                        <button class="accordion"
+                            style="margin-top: 0; font-size: 15px; background-color: #fafafa; border: none; border-radius: 8px;">Benim
+                            Hesabım Yok veya Satış Gelmiyor, Ne Yapmalıyım?</button>
+                        <div class="panel" style="background-color: #fdfdfd; border: none; border-radius: 0 0 8px 8px;">
+                            <div class="panel-content" style="padding: 20px;">
+                                <img src="metareklamları.png" alt="Meta Reklamları" class="dropdown-image"
+                                    style="margin-bottom: 15px;">
+                                <p style="font-size: 15px;">Aslında sosyal medyadan 1 satış geliyorsa, Meta
+                                    reklamlarından bunun 10 katı daha fazla satış alabilirsiniz. Mantıken baktığınızda,
+                                    sosyal medya platformlarının izleyici kitlesi çok geniştir ve net bir kitle
+                                    hedeflemesi yapmak zordur. Bazen videolarınız yurtdışında bile viral olabilir (benim
+                                    beden dili videolarım buna güzel bir örnektir). Üstelik organik içerik üretmenin
+                                    riski yoktur; videoyu atarsınız, izlenir ve sipariş gelir. Medyada sizi izleyen
+                                    insanların işleyişi temelde budur.</p>
+
+                                <p style="font-size: 15px; margin-top: 15px;">Fakat Meta reklamlarında oyunun kuralları
+                                    tamamen değişir. Sosyal medyada deneyip iyi sonuç aldığınız veya güvendiğiniz bir
+                                    kreatifi (gönderiyi), eğitimde detaylıca anlattığım stratejilerle Meta'da reklama
+                                    çıkarsanız, asıl o zaman hedeflediğiniz rakamlara ulaşabilirsiniz. Aksi takdirde,
+                                    sadece organik medya pazarlamasıyla ve içerik üreterek sizi tatmin edecek rakamlara
+                                    ulaşmanız epey bir zordur.</p>
+
+                                <p style="font-size: 15px; margin-top: 15px;">Tabii ki Meta reklamlarına bir bütçe
+                                    ayırdığınız için para kaybetme riskiniz diğerine göre daha fazladır. Ancak risk
+                                    almadan büyük paralar kazanmanız mümkün değildir. Bu yöntem, sıfır sermayesi olanlar
+                                    için maalesef uygun değildir. <em>(Ben her zaman gerçekleri söylerim; "sıfır
+                                        sermaye" deyip size Meta reklamlarını anlatanlardan uzak durmanızı tavsiye
+                                        ederim.)</em></p>
+
+                                <!-- Ekstra Eğitim Seçeneği (Upsell) -->
+                                <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 15px;">
+                                    <style>
+                                        /* Checkbox'ları yuvarlak (radio) görünümüne getirmek için */
+                                        .radio-style-checkbox {
+                                            appearance: none;
+                                            -webkit-appearance: none;
+                                            width: 22px;
+                                            height: 22px;
+                                            flex-shrink: 0;
+                                            border: 2px solid #1a1a1a;
+                                            border-radius: 50%;
+                                            background-color: white;
+                                            display: grid;
+                                            place-content: center;
+                                        }
+
+                                        .radio-style-checkbox::before {
+                                            content: "";
+                                            width: 12px;
+                                            height: 12px;
+                                            border-radius: 50%;
+                                            transform: scale(0);
+                                            transition: 120ms transform ease-in-out;
+                                            box-shadow: inset 1em 1em #1a1a1a;
+                                        }
+
+                                        .radio-style-checkbox:checked::before {
+                                            transform: scale(1);
+                                        }
+                                    </style>
+
+                                    <label
+                                        style="display: flex; align-items: center; gap: 15px; cursor: pointer; background-color: #f9f9f9; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 600; border: 1px solid #eee; transition: background-color 0.3s;"
+                                        onmouseover="this.style.backgroundColor='#f1f1f1'"
+                                        onmouseout="this.style.backgroundColor='#f9f9f9'">
+                                        <input type="checkbox" name="paket_secimi_meta" id="meta_ekle" value="meta"
+                                            class="radio-style-checkbox" style="cursor: pointer;">
+                                        Meta reklam eğitimini paketime ekle
+                                    </label>
+
+                                    <label
+                                        style="display: flex; align-items: center; gap: 15px; cursor: pointer; background-color: #f9f9f9; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 600; border: 1px solid #eee; transition: background-color 0.3s;"
+                                        onmouseover="this.style.backgroundColor='#f1f1f1'"
+                                        onmouseout="this.style.backgroundColor='#f9f9f9'">
+                                        <input type="checkbox" name="paket_secimi_tiktok" id="tiktok_ekle"
+                                            value="tiktok" class="radio-style-checkbox" style="cursor: pointer;">
+                                        <div>
+                                            Tiktok ads eğitimini paketime ekle
+                                            <span
+                                                style="font-size: 14px; font-weight: 500; margin-left: 5px; color: #777;">(Meta
+                                                ile aynı)</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İkinci Açılır Kapanır (Accordion) Alanı -->
+            <button class="accordion">Hangi platform'dan satış yapıyorum?</button>
+            <div class="panel">
+                <div class="panel-content" style="padding: 20px;">
+                    <img src="platformlar.png" alt="Satış Platformları" class="dropdown-image"
+                        style="margin-bottom: 15px;">
+                    <p>E-kitap veya dijital ürün satışı yapabileceğiniz sayısız platform var. Ancak ben şu anda tamamen
+                        Türkiye pazarına odaklanmış durumdayım ve henüz global pazara girmedim. Bu yüzden gerek benim
+                        için gerekse potansiyel müşterilerimin güvenliği ve kolaylığı için en doğru seçenek Shopier
+                        oldu.</p>
+
+                    <p>Eğitimimde, Türkiye şartlarında herkese en uygun olacağını düşündüğüm için Shopier'in
+                        <strong>gerçekten profesyonel kullanımını</strong> tüm detaylarıyla gösterdim. "Shopier işte,
+                        bilgilerini girip kayıt oluyorsun, ürün ekleyip satışa başlıyorsun" demeyin; olay kesinlikle
+                        bundan ibaret değil.
+                    </p>
+
+                    <p>Müşterilerinizin sitenizde kaç saniye durduğu, hangi ürünleri incelediği, hangi butonlara
+                        tıkladığı ve neleri satın aldığı gibi tüm kritik verileri Shopier üzerinden takip
+                        edebiliyorsunuz. Bu verileri Meta Piksel ile eşleştirerek <em>Retargeting</em> (Yeniden
+                        Pazarlama) gibi stratejilerle reklam çıkmak, satışlarınızı devasa oranlarda artırmak için harika
+                        bir yöntemdir.</p>
+
+                    <p>Hatta vizyonu biraz daha genişletip, çok ufak maliyetlerle <strong>kendi dijital ürün teslimat
+                            altyapınızı nasıl kuracağınızı</strong> da anlattım. Bu sayede müşterilerinize özel bir
+                        "E-kitap okuma (E-book reader)" sitesi sunabilir ve kendi markanız üzerinden e-posta pazarlaması
+                        yaparak (indirim kodlarıyla vb.) siparişlerinizi çok rahat 2 katına çıkarabilirsiniz. Hiçbir
+                        teknik bilgisi olmayan birinin bile çok rahatlıkla anlayabileceği şekilde basit, adım adım bir
+                        sistem kurdum.</p>
+
+                    <!-- Ekstra Eğitim Seçeneği (Upsell - Platformlar) -->
+                    <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: pointer; background-color: #f9f9f9; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 600; border: 1px solid #eee; transition: background-color 0.3s;"
+                            onmouseover="this.style.backgroundColor='#f1f1f1'"
+                            onmouseout="this.style.backgroundColor='#f9f9f9'">
+                            <input type="radio" name="platform_secimi" id="shopier_ekle" value="shopier" checked
+                                style="width: 22px; height: 22px; accent-color: #1a1a1a; cursor: pointer;">
+                            Shopier Kurulumu (Profesyonel) Eğitimini paketime ekle
+                        </label>
+
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: not-allowed; background-color: #fefefe; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 500; border: 1px solid #f5f5f5; color: #999;">
+                            <input type="radio" name="platform_secimi" disabled
+                                style="width: 22px; height: 22px; accent-color: #ccc; cursor: not-allowed;">
+                            <span style="text-decoration: line-through;">Etsy kurulumu paketime ekle</span>
+                        </label>
+
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: not-allowed; background-color: #fefefe; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 500; border: 1px solid #f5f5f5; color: #999;">
+                            <input type="radio" name="platform_secimi" disabled
+                                style="width: 22px; height: 22px; accent-color: #ccc; cursor: not-allowed;">
+                            <div>
+                                <span style="text-decoration: line-through;">Gumroad kurulumunu paketime ekle</span>
+                                <span style="font-size: 13px; margin-left: 5px; color: #aaa;">(Shopier ile neredeyse
+                                    aynı)</span>
+                            </div>
+                        </label>
+
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: not-allowed; background-color: #fefefe; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 500; border: 1px solid #f5f5f5; color: #999;">
+                            <input type="radio" name="platform_secimi" disabled
+                                style="width: 22px; height: 22px; accent-color: #ccc; cursor: not-allowed;">
+                            <div>
+                                <span style="text-decoration: line-through;">Amazon Kindle kurulumunu paketime
+                                    ekle</span>
+                                <span style="font-size: 13px; margin-left: 5px; color: #aaa;">(Çok tercih
+                                    edilmiyor)</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Üçüncü Açılır Kapanır (Accordion) Alanı - Vergi -->
+            <button class="accordion">Vergi nasıl ödeniyor şirket gerekli mi?</button>
+            <div class="panel">
+                <div class="panel-content" style="padding: 20px;">
+                    <p style="font-size: 15px;">Hayır, kesinlikle şirkete gerek yoktur. Türkiye'den bu sistemi kurmak
+                        istiyorsanız "Sosyal medya vergi muafiyeti" hesabı açarak eğitim amacıyla sattığınız
+                        e-kitapların vergisi banka hesabınıza gelen paranın <strong>%15 kesilerek otomatik
+                            olarak</strong> ödeniyor.</p>
+
+                    <p style="font-size: 15px; margin-top: 15px;">Daha detaylı bilgi için <a
+                            href="https://youtu.be/RkNz0QWS_5s?t=703" target="_blank"
+                            style="color: #0066cc; text-decoration: underline; font-weight: 600;">bu videoyu (kaynaktır,
+                            tıklayın)</a> izleyebilirsiniz. Ne KDV, ne beyanname, ne muhasebeci; bunlara hiç gerek yok.
+                    </p>
+
+                    <p style="font-size: 15px; margin-top: 15px;">Fakat burada sıkıntılı bir durum var: Bunu
+                        yaptığınızda 4-B sigortalı sayılıyorsunuz ve her ay (2026 itibariyle) ortalama <strong>10.000 TL
+                            Bağ-Kur borcunuz çıkacaktır</strong>. Bunu mutlaka dikkate almanız gerekiyor.</p>
+
+                    <p style="font-size: 15px; margin-top: 15px;">Bu durumda benim eğitimde anlatmadığım fakat yakında
+                        yapıp eğitime eklemeyi düşündüğüm <em>'İngiltere'de şirket açma'</em> konusu devreye giriyor. Bu
+                        yöntemle birlikte daha avantajlı bir şekilde verginizi daha basitçe ödeyerek (yıllık %19
+                        kurumlar vergisi) şirketiniz olmuş oluyor. Ama bunu araştırmanızı tavsiye ederim, bir bilen ile
+                        konuşun. Benim şuanlık net bir fikrim yok, benim de araştırma sürecim devam ediyor.</p>
+
+                    <!-- Ekstra Eğitim Seçeneği (Upsell - Vergi) -->
+                    <div style="margin-top: 25px;">
+                        <style>
+                            /* Vergi dropdownu içindeki radio style checkbox */
+                            .radio-style-checkbox-tax {
+                                appearance: none;
+                                -webkit-appearance: none;
+                                width: 22px;
+                                height: 22px;
+                                flex-shrink: 0;
+                                border: 2px solid #1a1a1a;
+                                border-radius: 50%;
+                                background-color: white;
+                                display: grid;
+                                place-content: center;
+                            }
+
+                            .radio-style-checkbox-tax::before {
+                                content: "";
+                                width: 12px;
+                                height: 12px;
+                                border-radius: 50%;
+                                transform: scale(0);
+                                transition: 120ms transform ease-in-out;
+                                box-shadow: inset 1em 1em #1a1a1a;
+                            }
+
+                            .radio-style-checkbox-tax:checked::before {
+                                transform: scale(1);
+                            }
+                        </style>
+
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: pointer; background-color: #f9f9f9; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 600; border: 1px solid #eee; transition: background-color 0.3s;"
+                            onmouseover="this.style.backgroundColor='#f1f1f1'"
+                            onmouseout="this.style.backgroundColor='#f9f9f9'">
+                            <input type="checkbox" name="paket_secimi_vergi" id="vergi_ekle" value="vergi"
+                                class="radio-style-checkbox-tax" style="cursor: pointer;">
+                            Muafiyet belgesinin nasıl alındığını eğitim paketine ekle
+                        </label>
+
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: not-allowed; background-color: #fefefe; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 500; border: 1px solid #f5f5f5; color: #999; margin-top: 15px;">
+                            <input type="radio" name="paket_secimi_vergi_uk" disabled
+                                style="width: 22px; height: 22px; accent-color: #ccc; cursor: not-allowed;">
+                            <div>
+                                <span style="text-decoration: line-through;">İngiltere'de şirket açma</span>
+                                <span style="font-size: 13px; margin-left: 5px; color: #aaa;">(çok yakında)</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dördüncü Açılır Kapanır (Accordion) Alanı - E-Kitap Yazımı -->
+            <button class="accordion">E-kitapları nasıl yazıyorum?</button>
+            <div class="panel">
+                <div class="panel-content" style="padding: 20px;">
+                    <img src="e-kitapyazma.png" alt="E-Kitap Yazımı" class="dropdown-image"
+                        style="margin-bottom: 15px;">
+
+                    <p style="font-size: 15px;">E-kitap yazımı için en iyi ve profesyonel yol, bütçenize uygun bir fiyat
+                        belirleyerek bu işi bir uzmana (freelancer'a) devretmektir. Konuyu bilseniz de bilmeseniz de,
+                        e-kitabı baştan sona kendiniz yazmaya kalkmak, hangi platformu kullanırsanız kullanın inanılmaz
+                        fazla zamanınızı alacaktır.</p>
+
+                    <p style="font-size: 15px; margin-top: 15px;">Şundan emin olabilirsiniz: E-kitabınız satışa
+                        çıktığında elde edeceğiniz gelir, yazım için freelancer'a ödeyeceğiniz ücreti fazlasıyla
+                        karşılayacaktır. Yani kendi değerli vaktinizi harcamaya gerçekten değmez.</p>
+
+                    <p style="font-size: 15px; margin-top: 15px;">Tabii ki sıfır sermaye ile başlıyorsanız ve bir yazara
+                        verecek bütçeniz yoksa iş başa düşüyor demektir. Bu durumda mecburiyetten kendi kitabınızı
+                        kendiniz yazacaksanız, kullanabileceğiniz en iyi, en pratik araç kesinlikle
+                        <strong>Canva</strong>'dır.
+                    </p>
+
+                    <!-- Ekstra Eğitim Seçeneği (Upsell - E-Kitap) -->
+                    <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 15px;">
+                        <style>
+                            /* E-kitap dropdownu içindeki radio style checkbox */
+                            .radio-style-checkbox-ebook {
+                                appearance: none;
+                                -webkit-appearance: none;
+                                width: 22px;
+                                height: 22px;
+                                flex-shrink: 0;
+                                border: 2px solid #1a1a1a;
+                                border-radius: 50%;
+                                background-color: white;
+                                display: grid;
+                                place-content: center;
+                            }
+
+                            .radio-style-checkbox-ebook::before {
+                                content: "";
+                                width: 12px;
+                                height: 12px;
+                                border-radius: 50%;
+                                transform: scale(0);
+                                transition: 120ms transform ease-in-out;
+                                box-shadow: inset 1em 1em #1a1a1a;
+                            }
+
+                            .radio-style-checkbox-ebook:checked::before {
+                                transform: scale(1);
+                            }
+                        </style>
+
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: pointer; background-color: #f9f9f9; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 600; border: 1px solid #eee; transition: background-color 0.3s;"
+                            onmouseover="this.style.backgroundColor='#f1f1f1'"
+                            onmouseout="this.style.backgroundColor='#f9f9f9'">
+                            <input type="checkbox" name="paket_secimi_canva" id="canva_ekle" value="canva"
+                                class="radio-style-checkbox-ebook" style="cursor: pointer;">
+                            Canva'dan basit e-kitap yapımı eğitimini pakete ekle (sıfır maliyet)
+                        </label>
+
+                        <label
+                            style="display: flex; align-items: center; gap: 15px; cursor: pointer; background-color: #f9f9f9; padding: 20px; border-radius: 8px; font-size: 16px; font-weight: 600; border: 1px solid #eee; transition: background-color 0.3s;"
+                            onmouseover="this.style.backgroundColor='#f1f1f1'"
+                            onmouseout="this.style.backgroundColor='#f9f9f9'">
+                            <input type="checkbox" name="paket_secimi_bionluk" id="bionluk_ekle" value="bionluk"
+                                class="radio-style-checkbox-ebook" style="cursor: pointer;">
+                            Bionluk'tan uygun fiyata yazar bulma eğitimini pakete ekle (az bütçe gerekir)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beşinci Açılır Kapanır (Accordion) Alanı - Eğitim Hakkında Genel Bilgiler -->
+            <button class="accordion">Eğitim hakkında genel bilgiler</button>
+            <div class="panel">
+                <div class="panel-content" style="padding: 20px;">
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #1a1a1a;">Zoom Desteği:
+                        </h4>
+                        <p style="font-size: 15px; margin: 0;">Bu eğitim hem sadece paket olarak izleyebileceğiniz
+                            formatta hem de birebir <strong>Zoom desteği</strong> ile birlikte satın alınabilmektedir.
+                            (Bu destek klasik anlamda bir "koçluk" değildir; birebir yayın üzerinden sorularınıza 1:1
+                            yardımcı olduğumuz, eğitim pratiğinde size eşlik ettiğimiz bir görüştür.)</p>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #1a1a1a;">Ödeme
+                            Yaptıktan Sonra Ne Oluyor?</h4>
+                        <p style="font-size: 15px; margin: 0;">Shopier üzerinden paketi aldığınızda, sistem sizi anlık
+                            olarak veritabanına ekler. Hemen sonrasında <strong>pdfmetodu.com.tr</strong> eğitim
+                            sitemizden size verilen kayıtlı e-mail adresiniz ve tarafınıza iletilen şifre (kodunuzla)
+                            kolayca giriş yapıyorsunuz. Giriş yaptıktan sonra 1.5 saatlik ve toplam 16 derslik eğitim
+                            videomuz sizi karşılıyor olacak.</p>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #1a1a1a;">Eğitim Tek
+                            Seferlik Mi Yoksa Abonelik Mi?</h4>
+                        <p style="font-size: 15px; margin: 0;">Eğitim tamamen <strong>tek seferliktir</strong> ve her
+                            zaman güncel kalacak şekilde ilerleyen zamanlarda yenilenecektir. Gelecek her yeni
+                            güncellemede sistemde kayıtlı olan tüm öğrencilere anında e-mail üzerinden bildirim
+                            gidecektir.</p>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
+    <style>
+        /* WhatsApp Floating Widget Styles */
+        .floating-wp-btn {
+            background-color: white;
+        }
+
+        .floating-wp-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+            /* Logoyu bir miktar içeri doğru küçültmek için padding ekliyoruz */
+        }
+    </style>
+
+    <!-- WhatsApp Floating Widget -->
+    <div class="wp-widget-container">
+
+        <!-- Toggle Button -->
+        <div class="floating-wp-btn" id="wp-toggle-btn">
+            <img src="wp-logo.png" alt="WhatsApp">
+        </div>
+
+        <!-- Pop-up Box -->
+        <div class="floating-wp-box" id="wp-popup-box">
+            <div class="wp-box-header">
+                <h3>Özel Paketinizi Oluşturalım</h3>
+                <p>Ekibimiz WhatsApp'ta sizi bekliyor</p>
+                <button class="wp-box-close" id="wp-close-btn">&times;</button>
+            </div>
+
+            <div class="wp-box-body">
+                <p>Yukarıdaki seçimlerinize göre <strong>sizin için en iyi özel paketi</strong> derledik! Sürecin hızlı
+                    ilerlemesi adına lütfen adınızı girin.</p>
+
+                <input type="text" id="ai-user-name" placeholder="Adınız Soyadınız">
+            </div>
+
+            <div class="wp-box-footer">
+                <button id="wp-contact-btn" disabled>
+                    <img src="wp-logo.png" alt="WhatsApp"
+                        style="width: 22px; height: 22px; object-fit: contain; filter: brightness(0) invert(1);">
+                    Whatsapp ile İletişime Geç
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accordion çalışması için JavaScript -->
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                var panelHeight = panel.scrollHeight;
+
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panelHeight + "px";
+                }
+
+                // İç içe accordion durumu için dış panelin yüksekliğini güncelle
+                var parentPanel = this.closest('.panel');
+                if (parentPanel && parentPanel.style.maxHeight) {
+                    var currentParentHeight = parseInt(parentPanel.style.maxHeight);
+                    if (this.classList.contains("active")) {
+                        parentPanel.style.maxHeight = (currentParentHeight + panelHeight) + "px";
+                    } else {
+                        parentPanel.style.maxHeight = (currentParentHeight - panelHeight) + "px";
+                    }
+                }
+            });
+        }
+
+        // --- WhatsApp Direct Contact Logic ---
+        const userNameInput = document.getElementById('ai-user-name');
+        const wpContactBtn = document.getElementById('wp-contact-btn');
+
+        // Modal Toggle
+        const wpToggleBtn = document.getElementById('wp-toggle-btn');
+        const wpPopupBox = document.getElementById('wp-popup-box');
+        const wpCloseBtn = document.getElementById('wp-close-btn');
+
+        function toggleWpBox() {
+            if (wpPopupBox.style.display === 'flex') {
+                wpPopupBox.style.display = 'none';
+            } else {
+                wpPopupBox.style.display = 'flex';
+                // Animasyon tetiklenmesi için ufak bir gecikme
+                wpPopupBox.style.animation = 'none';
+                wpPopupBox.offsetHeight;
+                wpPopupBox.style.animation = 'popUp 0.3s ease forwards';
+            }
+        }
+
+        wpToggleBtn.addEventListener('click', toggleWpBox);
+        wpCloseBtn.addEventListener('click', () => {
+            wpPopupBox.style.display = 'none';
+        });
+
+        // Check if name is filled
+        function checkInputs() {
+            if (userNameInput.value.trim() !== "") {
+                wpContactBtn.disabled = false;
+                wpContactBtn.classList.add('active');
+            } else {
+                wpContactBtn.disabled = true;
+                wpContactBtn.classList.remove('active');
+            }
+        }
+
+        userNameInput.addEventListener('input', checkInputs);
+
+        // WhatsApp Action
+        wpContactBtn.addEventListener('click', () => {
+            const phone = "5415409958";
+            const userName = userNameInput.value.trim();
+
+            // Gather inputs (Checkbox & Radio)
+            let selections = [];
+
+            if (document.getElementById('meta_ekle') && document.getElementById('meta_ekle').checked) selections.push("Meta Reklam Eğitimi (+)");
+            if (document.getElementById('tiktok_ekle') && document.getElementById('tiktok_ekle').checked) selections.push("Tiktok Ads Eğitimi (+)");
+
+            const platformRadios = document.querySelectorAll('input[name="platform_secimi"]:checked');
+            if (platformRadios.length > 0) selections.push("Shopier Kurulumu (Profesyonel) (+)");
+
+            if (document.getElementById('vergi_ekle') && document.getElementById('vergi_ekle').checked) selections.push("Muafiyet Belgesi Eğitimi (+)");
+            if (document.getElementById('canva_ekle') && document.getElementById('canva_ekle').checked) selections.push("Canva İndirimli E-kitap Yapımı (+)");
+            if (document.getElementById('bionluk_ekle') && document.getElementById('bionluk_ekle').checked) selections.push("Bionluk Yazar Bulma Eğitimi (+)");
+
+            let selectionText = selections.length > 0 ? selections.join('\n- ') : 'Özel bir eklenti seçilmedi (Sadece Temel Paket)';
+
+            const message = `Merhaba Enes, ben ${userName}.\n\nWeb sitenizdeki formu doldurdum ve benim için hazırladığınız eğitim paketiyle ilgileniyorum.\n\n*İstediğim Paket İçeriği:*\n- Temel PDF Metodu Eğitimi\n- ${selectionText}\n\nBu paket hakkında ek bilgi almak ve satın alma işlemine geçmek istiyorum.`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/90${phone}?text=${encodedMessage}`, '_blank');
+        });
+    </script>
 </body>
+
 </html>
