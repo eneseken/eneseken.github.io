@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enes Eken - PDF Metodu</title>
+    <style>
+        /* Modern Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* Arka plan rengi (Görseldeki gibi açık pembemsi/gri bir renk) */
+            background-color: #EFE9E6; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Ortadaki beyaz sayfa görünümü */
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 650px; /* İçeriğin çok yayılmaması için ideal genişlik */
+            min-height: 100vh;
+            padding: 60px 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        /* En üstteki büyük başlık (Logo gibi) */
+        .site-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .site-header h1 {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 56px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .site-header .date {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Profil Kısmı */
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            /* Resim yoksa gri bir yer tutucu */
+            background-color: #e0e0e0; 
+            display: block;
+        }
+
+        .profile-name {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        /* İçerik Metinleri */
+        .content {
+            font-size: 16px;
+        }
+
+        .content p {
+            margin-bottom: 24px; /* Paragraflar arası boşluk */
+        }
+
+        /* Mobil Cihazlar İçin Uyum (Responsive) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+            .site-header h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Site Logo ve Tarih / Slogan Alanı -->
+        <header class="site-header">
+            <h1>ZihinAcademy</h1>
+            <div class="date">PDF METODU</div>
+        </header>
+
+        <!-- Profil ve İsim -->
+        <div class="profile-section">
+            <!-- NOT: Profil resminizi eklemek için 'profile.jpg' adında kare bir fotoğrafınızı klasöre atın ve alttaki src kısmına adını yazın -->
+            <img src="profile.jpg" alt="Enes Eken Profil" class="profile-pic" onerror="this.src='https://ui-avatars.com/api/?name=Enes+Eken&size=120&background=random&color=fff'">
+            <h2 class="profile-name">Enes Eken</h2>
+        </div>
+
+        <!-- Yazı İçeriği -->
+        <main class="content">
+            <p>Merhaba, ben Enes. 19 yaşındayım. Uzun süredir internetten para kazanma ve yapay zeka alanlarında kendimi aktif olarak geliştiriyorum. Son 4 aydır ise özellikle PDF Metodu üzerine yoğunlaştım. Bu süreçte 500’den fazla e-kitap satışı gerçekleştirdim ve satışlarım aktif olarak devam ediyor.</p>
+            
+            <p>Bu zamana kadar edindiğim tüm bilgi ve tecrübeleri, 16 videodan oluşan kapsamlı bir eğitim setinde topladım. Eğitimleri; kısa, sade ve herkesin anlayabileceği şekilde anlatmaya özellikle özen gösterdim. Türkiye’de son dönemde “dropshipping” kurslarının adeta bir bitki örtüsü gibi her yeri sarması, çoğunun da gerçekçi olmayan vaatler sunması nedeniyle; bu sisteme alternatif olarak Türkiye’de ilk kez, tamamen otomasyon mantığına dayalı, sürdürülebilir bir kazanç modeli olan PDF Metodu’nu hazırladım.</p>
+            
+            <p>Bu eğitimde; işi yasal çerçevede nasıl yapacağınızdan, doğru ürün seçimine, e-kitap içeriği hazırlamadan profesyonel kapak tasarımına, fiyatlandırmadan satış ve otomasyon süreçlerine kadar adım adım her detayı anlatıyorum. Shopier üzerinden e-kitap satan birçok kişi var; ancak bu işi bu kadar sistemli, şeffaf ve profesyonel şekilde ele alan çok az kişi bulunuyor.</p>
+            
+            <p>Amacım; hayal satmak değil, gerçekten uygulanabilir, dürüst ve sonuç alınabilir bir sistem sunmak. Eğer internetten para kazanma konusunda somut ve mantıklı bir yol arıyorsan, bu eğitim tam olarak bunun için hazırlandı.</p>
+        </main>
+    </div>
+
+</body>
+</html>
